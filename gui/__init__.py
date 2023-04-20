@@ -50,7 +50,6 @@ def buttons(s: Stacker, callback: Callable):
 
 
 def create_view_model_of_shortcut_setter(callback: Callable, commands_to_short_cuts: dict, specified_parent=None):
-    from stacker import Stacker
     stacker = Stacker(specified_parent=specified_parent)
     stacker.vstack(
         top(stacker),
