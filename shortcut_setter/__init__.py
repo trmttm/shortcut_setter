@@ -98,8 +98,13 @@ def upon_keyboard_to_entry(i: int, v: ViewABC, modifier, key):
             else:
                 keyboard_shortcut_str += f'{modifier_key_str.capitalize()}'
 
-    if keyboard_shortcut_str and key:
-        keyboard_shortcut_str += f',{key.upper()}'
+    if key == 'Tab':
+        pass
+    elif keyboard_shortcut_str and key:
+        if len(key) == 1:
+            keyboard_shortcut_str += f',{key.upper()}'
+        else:
+            keyboard_shortcut_str += f',{key}'
     else:
         keyboard_shortcut_str += f'{key.upper()}'
 
