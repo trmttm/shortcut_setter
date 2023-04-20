@@ -12,6 +12,7 @@ class MyTestCase(unittest.TestCase):
         n_commands = len(commands_to_short_cuts)
 
         def callback(command_str):
+            print(command_str, gui.get_state(app, n_commands))
             if command_str == gui.KEY_CANCEL:
                 pass
             elif command_str == gui.KEY_APPLY:
@@ -20,7 +21,7 @@ class MyTestCase(unittest.TestCase):
             elif command_str == gui.KEY_DONE:
                 data = dict(zip(commands_to_short_cuts.values(), gui.get_state(app, n_commands)))
                 gui.save_shortcut_configuration_file(file_path, data)
-            print(command_str, gui.get_state(app, n_commands))
+                app.close('root')
 
         view_model = gui.create_view_model_of_shortcut_setter(callback, commands_to_short_cuts)
         app.add_widgets(view_model)
