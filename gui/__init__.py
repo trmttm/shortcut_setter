@@ -6,8 +6,6 @@ from stacker import Stacker
 from stacker import widgets as w
 from view_tkinter.TkImplementations.keyboard_shortcut import modifier_to_elements_str
 
-import gui
-
 KEY_CANCEL = 'Cancel'
 KEY_APPLY = 'Apply'
 KEY_DONE = 'Done'
