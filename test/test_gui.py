@@ -31,8 +31,9 @@ class MyTestCase(unittest.TestCase):
                 gui.save_shortcut_configuration_file(file_path, data)
                 app.close(specified_parent)
 
-        vm = [widget_model('root', specified_parent, 'toplevel', 0, 0, 0, 0, 'nswe', **options)]
-        view_model = vm + gui.create_view_model_of_shortcut_setter(callback, commands_to_short_cuts, specified_parent)
+        view_model_root = [widget_model('root', specified_parent, 'toplevel', 0, 0, 0, 0, 'nswe', **options)]
+        view_model_popup = gui.create_view_model_of_shortcut_setter(callback, commands_to_short_cuts, specified_parent)
+        view_model = view_model_root + view_model_popup
         app.add_widgets(view_model)
         [gui.bind_commands(n, app) for n in range(n_commands)]
         app.launch_app()
