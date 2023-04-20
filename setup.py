@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='shortcut_setter',
     version='',
-    packages=['gui', 'test'],
+    packages=['shortcut_setter', 'test'],
     url='',
     license='',
     author='TRMTTM',
