@@ -79,11 +79,10 @@ def upon_keyboard_to_entry(i: int, v: ViewABC, modifier, key):
                 keyboard_shortcut_str += f'{modifier_key_str.capitalize()}'
 
     if keyboard_shortcut_str and key:
-        keyboard_shortcut_str += f',{key}'
+        keyboard_shortcut_str += f',{key.upper()}'
     else:
-        keyboard_shortcut_str += f'{key}'
+        keyboard_shortcut_str += f'{key.upper()}'
 
     if keyboard_shortcut_str:
         v.set_value(get_entry_id(i), '')
         v.set_value(get_shortcut_label_id(i), keyboard_shortcut_str)
-        # print(keyboard_shortcut_str)
