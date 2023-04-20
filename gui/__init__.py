@@ -6,6 +6,8 @@ from stacker import Stacker
 from stacker import widgets as w
 from view_tkinter.TkImplementations.keyboard_shortcut import modifier_to_elements_str
 
+import gui
+
 KEY_CANCEL = 'Cancel'
 KEY_APPLY = 'Apply'
 KEY_DONE = 'Done'
@@ -19,6 +21,10 @@ def get_shortcut_label_id(n) -> str:
     return f'label_command_{n}'
 
 
+def get_clear_button_id(n: int) -> str:
+    return f'clear_button_command_{n}'
+
+
 def top(s: Stacker):
     return s.hstack(
         w.Spacer(),
@@ -30,11 +36,11 @@ def top(s: Stacker):
 def scrollable(s: Stacker, commands_to_short_cuts: dict):
     return s.vstack_scrollable(
         *tuple(s.hstack(
-            w.CheckButton(f'check_button_command_{n}').padding(30, 0),
             w.Label(f'label_command_{n}').text(f'{n}. {command_name}'),
             w.Entry(get_entry_id(n)).default_value(shortcut_key),
+            w.Button(get_clear_button_id(n)).text('X').width(1),
             w.Label(get_shortcut_label_id(n)).text(shortcut_key).width(30).padding(30, 0),
-            w.Spacer().adjust(-3),
+            w.Spacer().adjust(-4),
         ) for (n, (command_name, shortcut_key)) in enumerate(commands_to_short_cuts.items()))
     )
 
@@ -76,6 +82,12 @@ def get_state(v: ViewABC, n_commands: int):
 
 def bind_commands(n: int, v: ViewABC):
     v.set_keyboard_shortcut_handler(get_entry_id(n), lambda modifier, key: upon_keyboard_to_entry(n, v, modifier, key))
+    v.bind_command_to_widget(get_clear_button_id(n), lambda: upon_clear_button(n, v))
+
+
+def upon_clear_button(n: int, v: ViewABC):
+    v.set_value(get_shortcut_label_id(n), '')
+    v.set_value(get_entry_id(n), '')
 
 
 def upon_keyboard_to_entry(i: int, v: ViewABC, modifier, key):
