@@ -1,3 +1,4 @@
+import json
 from typing import Callable
 
 from interface_view import ViewABC
@@ -60,8 +61,18 @@ def create_view_model_of_shortcut_setter(callback: Callable, commands_to_short_c
     return stacker.view_model
 
 
+def load_shortcut_configuration_file(file_path):
+    with open(file_path) as json_file:
+        return json.load(json_file)
+
+
+def save_shortcut_configuration_file(file_path, data: dict):
+    with open(file_path, 'w') as json_file:
+        json.dump(data, json_file)
+
+
 def get_state(v: ViewABC, n_commands: int):
-    return tuple(v.get_value(get_entry_id(n)) for n in range(n_commands))
+    return tuple(v.get_value(get_shortcut_label_id(n)) for n in range(n_commands))
 
 
 def bind_commands(n: int, v: ViewABC):
