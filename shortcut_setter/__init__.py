@@ -89,6 +89,7 @@ def upon_clear_button(n: int, v: ViewABC):
 
 
 def upon_keyboard_to_entry(i: int, v: ViewABC, modifier, key):
+    is_debug_and_configuration_mode = False
     modifier_keys = modifier_to_elements_str.get(modifier, '')
     keyboard_shortcut_str = ''
     for n, modifier_key_str in enumerate(modifier_keys):
@@ -111,3 +112,8 @@ def upon_keyboard_to_entry(i: int, v: ViewABC, modifier, key):
     if keyboard_shortcut_str:
         v.set_value(get_entry_id(i), '')
         v.set_value(get_shortcut_label_id(i), keyboard_shortcut_str)
+
+    if is_debug_and_configuration_mode:
+        key_modifier_passed = f'modifier:{modifier}, key:{key}'
+        v.set_value(get_entry_id(i), key_modifier_passed)
+        v.set_value(get_shortcut_label_id(i), key_modifier_passed)
