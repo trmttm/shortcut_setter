@@ -31,10 +31,10 @@ def top(s: Stacker):
     )
 
 
-def scrollable(s: Stacker, commands_to_short_cuts: dict):
+def SCROLLABLE(s: Stacker, commands_to_short_cuts: dict):
     return s.vstack_scrollable(
         *tuple(s.hstack(
-            w.Label(f'label_command_{n}').text(f'{n}. {command_name}'),
+            w.Label(f'label_command_{n}').text(f'{n}. {command_name}').padding(20, 0),
             w.Entry(get_entry_id(n)).default_value(shortcut_key),
             w.Button(get_clear_button_id(n)).text('X').width(1),
             w.Label(get_shortcut_label_id(n)).text(shortcut_key).width(30).padding(30, 0),
@@ -57,7 +57,7 @@ def create_view_model_of_shortcut_setter(callback: Callable, commands_to_short_c
     stacker = Stacker(specified_parent=specified_parent)
     stacker.vstack(
         top(stacker),
-        scrollable(stacker, commands_to_short_cuts),
+        SCROLLABLE(stacker, commands_to_short_cuts),
         buttons(stacker, callback),
         w.Spacer().adjust(-2),
     )
