@@ -32,7 +32,8 @@ class MyTestCase(unittest.TestCase):
                 app.close(specified_parent)
 
         view_model_root = [widget_model('root', specified_parent, 'toplevel', 0, 0, 0, 0, 'nswe', **options)]
-        view_model_popup = shortcut_setter.create_view_model_of_shortcut_setter(callback, commands_to_short_cuts, specified_parent)
+        view_model_popup = shortcut_setter.create_view_model_of_shortcut_setter(callback, commands_to_short_cuts,
+                                                                                specified_parent)
         view_model = view_model_root + view_model_popup
         app.add_widgets(view_model)
         [shortcut_setter.bind_commands(n, app) for n in range(n_commands)]
